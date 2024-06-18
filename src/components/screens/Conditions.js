@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Select from "react-select";
+
 const Conditions = () => {
   const [conditions, setConditions] = useState([]);
   const [conditions_, setConditions_] = useState([]);
+  const [searchSymptoms, setSearchSymptoms] = useState([]);
+  const [symptoms_, setSymptoms_] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [causes, setCauses] = useState("");
@@ -29,6 +33,24 @@ const Conditions = () => {
     axios.get("http://who.ubuzima.rw/who/conditions/").then((response) => {
       setConditions(response.data);
       setConditions_(response.data);
+    });
+  };
+
+  const fetchSymptoms = () => {
+    let my_token = localStorage.getItem("token");
+    const config = {
+      headers: {
+        Authorization: `Token ${my_token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios.get("http://who.ubuzima.rw/who/symptoms/").then((response) => {
+      const sympt = response.data.map(obj => {
+        const { id, name } = obj;
+        return { value: id, label: name }
+      })
+      setSymptoms_(sympt);
     });
   };
 
@@ -93,24 +115,37 @@ const Conditions = () => {
       });
   };
 
-  const searchCondition = (value) => {
-    //setSearchTerm(value); // Update the search term state
+  const searchCondition = (values) => {
+    if(values.length>0){
+      let my_token = localStorage.getItem("token");
 
-    if (value === "") {
-      setConditions(conditions_); // Reset to the original list of projects
-    } else {
-      const filteredConditions = conditions.filter((condition) => {
-        const conditionLowercase = condition.name.toLowerCase();
-        const searchTermLowercase = value.toLowerCase();
-        return conditionLowercase.includes(searchTermLowercase);
+
+    const config = {
+      headers: {
+        Authorization: `Token ${my_token}`,
+        "Content-Type": "application/json",
+      },
+    };
+
+    //axios post
+    axios
+      .get(`http://who.ubuzima.rw/who/conditions-by-symptoms/?symptom_ids=${values.join(',')}`, config)
+      .then((res) => {
+        if (res.status == 200 || res.status == 201) {
+          setConditions(res.data)
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
-
-      setConditions(filteredConditions);
+    }else{
+      setConditions(conditions_)
     }
   };
 
   useEffect(() => {
     fetchConditions();
+    fetchSymptoms();
   }, []);
 
   return (
@@ -311,19 +346,14 @@ const Conditions = () => {
           </div>
 
           <div class="btn-group m-3">
-            <div class="input-group">
-              <input
-                type="text"
-                onChange={(e) => searchCondition(e.target.value)}
-                class="form-control"
-                placeholder="search customer"
+            <div  style={{width:400}}>
+              <Select
+              options={symptoms_}
+              isMulti
+              isSearchable
+              onChange={(e) => searchCondition(e.map(el=>el.value))}
+              required
               />
-              <span
-                class="input-group-text cursor-pointer"
-                style={{ backgroundColor: "#6A6CFE" }}
-              >
-                <i class="bx bx-search" style={{ color: "white" }}></i>
-              </span>
             </div>
           </div>
         </div>

@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Select from 'react-select';
 import axios from "axios";
 const Symptoms = () => {
   const [symptoms, setSymptoms] = useState([]);
   const [symptoms_, setSymptoms_] = useState([]);
+  const [conditions, setConditions] = useState([]);
+  const [conditions_, setConditions_] = useState([]);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [causes, setCauses] = useState("");
-  const [symptom, setSymptom] = useState("");
-  const [investigations, setInvestigations] = useState("");
-  const [treatments, setTreatments] = useState("");
-  const [surgicalOptions, setSurgicalOptions] = useState("");
-  const [preventiveMeasures, setPreventiveMeasures] = useState("");
   const [furtherManagement, setFurtherManagement] = useState("");
   const [referral, setReferral] = useState("");
-  const [prognosis, setPrognosis] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const fetchConditions = () => {
+
+    let my_token = localStorage.getItem('token');
+    const config = { headers: { "Authorization": `Token ${my_token}`, "Content-Type": "application/json" } };
+
+
+    axios.get(`http://who.ubuzima.rw/who/conditions/`,config).then(response => {
+      const cond = response.data.map(obj => {
+        const { id, name } = obj;
+        return { value: id, label: name }
+      })
+      setConditions(cond)
+    });
+
+  }
+
 
   const fetchSymptoms = () => {
     let my_token = localStorage.getItem("token");
@@ -34,6 +46,7 @@ const Symptoms = () => {
 
   const resetForm = () => {
     setName("");
+    setConditions_([]);
     setFurtherManagement("");
     setReferral("");
   };
@@ -45,6 +58,7 @@ const Symptoms = () => {
 
     const postObj = JSON.stringify({
       name:name,
+      conditions:conditions_,
       further_management: furtherManagement,
       referral_criteria: referral,
     });
@@ -95,6 +109,7 @@ const Symptoms = () => {
 
   useEffect(() => {
     fetchSymptoms();
+    fetchConditions();
   }, []);
 
   return (
@@ -151,6 +166,19 @@ const Symptoms = () => {
                       class="form-control"
                       id="basic-default-fullname"
                       placeholder="Name"
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label className="form-label" htmlFor="furtherManagement">
+                      Associated Conditions
+                    </label>
+                    <Select
+                    options={conditions}
+                    isMulti
+                    isSearchable
+                    onChange={(e) => setConditions_(e.map(el=>el.value))}
+                    required
                     />
                   </div>
 

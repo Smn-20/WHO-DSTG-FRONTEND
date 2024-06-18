@@ -13,6 +13,7 @@ import Company from './components/screens/Company';
 import PrivateRoute from './PrivateRoute';
 import { connect } from 'react-redux';
 import ConditionsDetails from './components/screens/ConditionDetails';
+import SymptomDetails from './components/screens/SymptomDetails';
 
 class App extends React.Component {
 
@@ -38,6 +39,7 @@ class App extends React.Component {
               <Route path='changePassword' element={<ChangePassword {...this.props}/>}/>
               <Route path='company' element={<Company/>}/>
               <Route path='condition-details' element={<ConditionsDetails/>}/>
+              <Route path='symptom-details' element={<SymptomDetails/>}/>
             </Route>
 
           </Route>
