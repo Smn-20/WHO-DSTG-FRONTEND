@@ -8,7 +8,7 @@ const Operator = () => {
 
     let my_token = localStorage.getItem('token');
     const config = { headers: { "Authorization": `Token ${my_token}`, "Content-Type": "application/json" } };
-    axios.get('http://localhost:8000/users/',config).then(response => {
+    axios.get('http://who.ubuzima.rw/who/users/',config).then(response => {
       setUsers(response.data);
       setUsers_(response.data);
     });

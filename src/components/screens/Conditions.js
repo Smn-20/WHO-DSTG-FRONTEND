@@ -26,7 +26,7 @@ const Conditions = () => {
       },
     };
 
-    axios.get("http://localhost:8000/conditions/").then((response) => {
+    axios.get("http://who.ubuzima.rw/who/conditions/").then((response) => {
       setConditions(response.data);
       setConditions_(response.data);
     });
@@ -74,7 +74,7 @@ const Conditions = () => {
 
     //axios post
     axios
-      .post("http://localhost:8000/create-condition/", postObj, config)
+      .post("http://who.ubuzima.rw/who/create-condition/", postObj, config)
       .then((res) => {
         setLoading(false);
         resetForm();

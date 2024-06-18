@@ -26,7 +26,7 @@ const Symptoms = () => {
       },
     };
 
-    axios.get("http://localhost:8000/symptoms/").then((response) => {
+    axios.get("http://who.ubuzima.rw/who/symptoms/").then((response) => {
       setSymptoms(response.data);
       setSymptoms_(response.data);
     });
@@ -58,7 +58,7 @@ const Symptoms = () => {
 
     //axios post
     axios
-      .post("http://localhost:8000/create-symptom/", postObj, config)
+      .post("http://who.ubuzima.rw/who/create-symptom/", postObj, config)
       .then((res) => {
         setLoading(false);
         resetForm();
