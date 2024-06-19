@@ -17,7 +17,7 @@ const SymptomDetails = ({ route }) => {
     };
 
     axios
-      .get(`http://who.ubuzima.rw/who/symptom/${location.state.symptom.id}/`)
+      .get(`http://localhost:8000/who/symptom/${location.state.symptom.id}/`)
       .then((response) => {
         setLoading(false);
         if (response.status == "200" || response.status == "201") {
@@ -103,25 +103,6 @@ const SymptomDetails = ({ route }) => {
                 }}
               >
                 <div style={{ fontWeight: "bold", color: "black" }}>
-                  Further Management
-                </div>
-                <div className="mt-1">
-                    <p className="mt-1">{location.state.symptom.further_management}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-3">
-            <div class="col-md-4">
-              <div
-                class="card mb-4 p-3"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                }}
-              >
-                <div style={{ fontWeight: "bold", color: "black" }}>
                   Investigations and diagnostic tests
                 </div>
                 <div className="mt-1">
@@ -142,6 +123,8 @@ const SymptomDetails = ({ route }) => {
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row mt-3">
             <div class="col-md-4">
               <div class="card mb-4 p-3"
               style={{ display: "flex", flexDirection: "column", height: "100%" }}
@@ -187,25 +170,6 @@ const SymptomDetails = ({ route }) => {
                   ) : (
                     <p className="mt-1">No Info...</p>
                   )}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-3 mb-3">
-            <div class="col-md-4">
-              <div
-                class="card mb-4 p-3"
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  height: "100%",
-                }}
-              >
-                <div style={{ fontWeight: "bold", color: "black" }}>
-                  Referral Criteria
-                </div>
-                <div className="mt-1">
-                    <p className="mt-1">{location.state.symptom.further_management}</p>
                 </div>
               </div>
             </div>

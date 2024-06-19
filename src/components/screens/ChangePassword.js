@@ -35,7 +35,7 @@ const ChangePassword = (props) => {
     
 
     //axios post
-    axios.put('http://who.ubuzima.rw/who/change-password/', postObj,config).then((res) => {
+    axios.put('http://localhost:8000/who/change-password/', postObj,config).then((res) => {
       setLoading(false)
       if (res.status == 200 || res.status == 201) {
         alert('Password successfully changed')

@@ -43,7 +43,7 @@ export const checkAuthTimeout = expirationTime => {
 export const authLogin = (email, password) => {
     return dispatch => {
         dispatch(authStart());
-        axios.post('http://who.ubuzima.rw/who/login/', {
+        axios.post('http://localhost:8000/who/login/', {
             email: email,
             password: password
         })
