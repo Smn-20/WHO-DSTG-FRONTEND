@@ -18,7 +18,7 @@ const Menu = (props) => {
     let my_token = localStorage.getItem('token');
     const config = { headers: { "Authorization": `Token ${my_token}`, "Content-Type": "application/json" } };
 
-    axios.get('http://localhost:8000/who/rest-auth/user/', config).then((res) => {
+    axios.get('http://who.ubuzima.rw/who/rest-auth/user/', config).then((res) => {
       setUser(res.data)
       var roles_ = []
       for (var i = 0; i < res.data.roles.length; i++) {

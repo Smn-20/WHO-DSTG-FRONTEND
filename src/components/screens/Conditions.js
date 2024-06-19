@@ -30,7 +30,7 @@ const Conditions = () => {
       },
     };
 
-    axios.get("http://localhost:8000/who/conditions/").then((response) => {
+    axios.get("http://who.ubuzima.rw/who/conditions/").then((response) => {
       setConditions(response.data);
       setConditions_(response.data);
     });
@@ -45,7 +45,7 @@ const Conditions = () => {
       },
     };
 
-    axios.get("http://localhost:8000/who/symptoms/").then((response) => {
+    axios.get("http://who.ubuzima.rw/who/symptoms/").then((response) => {
       const sympt = response.data.map(obj => {
         const { id, name } = obj;
         return { value: id, label: name }
@@ -96,7 +96,7 @@ const Conditions = () => {
 
     //axios post
     axios
-      .post("http://localhost:8000/who/create-condition/", postObj, config)
+      .post("http://who.ubuzima.rw/who/create-condition/", postObj, config)
       .then((res) => {
         setLoading(false);
         resetForm();
@@ -129,7 +129,7 @@ const Conditions = () => {
 
     //axios post
     axios
-      .get(`http://localhost:8000/who/conditions-by-symptoms/?symptom_ids=${values.join(',')}`, config)
+      .get(`http://who.ubuzima.rw/who/conditions-by-symptoms/?symptom_ids=${values.join(',')}`, config)
       .then((res) => {
         if (res.status == 200 || res.status == 201) {
           setConditions(res.data)
