@@ -14,6 +14,7 @@ import PrivateRoute from './PrivateRoute';
 import { connect } from 'react-redux';
 import ConditionsDetails from './components/screens/ConditionDetails';
 import SymptomDetails from './components/screens/SymptomDetails';
+import { ComingSoon } from './components/screens/ComingSoon';
 
 class App extends React.Component {
 
@@ -40,6 +41,7 @@ class App extends React.Component {
               <Route path='company' element={<Company/>}/>
               <Route path='condition-details' element={<ConditionsDetails/>}/>
               <Route path='symptom-details' element={<SymptomDetails/>}/>
+              <Route path='coming-soon' element={<ComingSoon/>}/>
             </Route>
 
           </Route>

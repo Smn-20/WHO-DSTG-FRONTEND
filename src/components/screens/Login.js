@@ -35,7 +35,7 @@ const Login = ({ authLogin, isAuthenticated, role }) => {
                 <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo"></span>
                   <span class="demo text-body fw-bolder" style={{fontSize:25}}>
-                    World Health Organization
+                    WHO  -  Digital Standard Treatment Guidelines
                   </span>
                 </a>
               </div>
