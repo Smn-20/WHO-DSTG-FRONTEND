@@ -48,6 +48,18 @@ const Menu = (props) => {
       className="layout-menu menu-vertical menu bg-menu-theme"
       style={{ overflowY: "auto" }} // Add this line to enable scrolling
     >
+      <style>
+        {`
+          #layout-menu::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+          }
+          #layout-menu {
+            -ms-overflow-style: none; /* Internet Explorer 10+ */
+            scrollbar-width: none; /* Firefox */
+          }
+        `}
+      </style>
       <div className="app-brand demo">
         <span className="demo menu-text fw-bolder ms-2">
           <img
