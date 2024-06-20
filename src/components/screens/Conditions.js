@@ -115,6 +115,22 @@ const Conditions = () => {
       });
   };
 
+  const search = (value) => {
+    //setSearchTerm(value); // Update the search term state
+
+    if (value === "") {
+      setConditions(conditions_); // Reset to the original list of projects
+    } else {
+      const filteredConditions = conditions_.filter((condition) => {
+        const conditionLowercase = condition.name.toLowerCase();
+        const searchTermLowercase = value.toLowerCase();
+        return conditionLowercase.includes(searchTermLowercase);
+      });
+
+      setConditions(filteredConditions);
+    }
+  };
+
   const searchCondition = (values) => {
     if(values.length>0){
       let my_token = localStorage.getItem("token");
@@ -358,10 +374,25 @@ const Conditions = () => {
           </div>
 
           <div class="btn-group m-3">
+            <div class="input-group" style={{marginRight:10,width:300}}>
+              <input
+                type="text"
+                onChange={(e) => search(e.target.value)}
+                class="form-control"
+                placeholder="Search condition by name"
+              />
+              <span
+                class="input-group-text cursor-pointer"
+                style={{ backgroundColor: "#6A6CFE" }}
+              >
+                <i class="bx bx-search" style={{ color: "white" }}></i>
+              </span>
+            </div>
             <div  style={{width:400}}>
               <Select
               options={symptoms_}
               isMulti
+              placeholder="Search condition by symptoms"
               isSearchable
               onChange={(e) => searchCondition(e.map(el=>el.value))}
               required
