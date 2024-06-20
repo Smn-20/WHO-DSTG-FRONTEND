@@ -17,7 +17,7 @@ const SymptomDetails = ({ route }) => {
     };
 
     axios
-      .get(`http://who.ubuzima.rw/who/symptom/${location.state.symptom.id}/`)
+      .get(`https://who.ubuzima.rw/who/symptom/${location.state.symptom.id}/`)
       .then((response) => {
         setLoading(false);
         if (response.status == "200" || response.status == "201") {

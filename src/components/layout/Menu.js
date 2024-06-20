@@ -24,7 +24,7 @@ const Menu = (props) => {
     };
 
     axios
-      .get("http://who.ubuzima.rw/who/rest-auth/user/", config)
+      .get("https://who.ubuzima.rw/who/rest-auth/user/", config)
       .then((res) => {
         setUser(res.data);
         var roles_ = [];

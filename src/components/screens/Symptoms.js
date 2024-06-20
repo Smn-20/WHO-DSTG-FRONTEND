@@ -18,7 +18,7 @@ const Symptoms = () => {
     const config = { headers: { "Authorization": `Token ${my_token}`, "Content-Type": "application/json" } };
 
 
-    axios.get(`http://who.ubuzima.rw/who/conditions/`,config).then(response => {
+    axios.get(`https://who.ubuzima.rw/who/conditions/`,config).then(response => {
       const cond = response.data.map(obj => {
         const { id, name } = obj;
         return { value: id, label: name }
@@ -38,7 +38,7 @@ const Symptoms = () => {
       },
     };
 
-    axios.get("http://who.ubuzima.rw/who/symptoms/").then((response) => {
+    axios.get("https://who.ubuzima.rw/who/symptoms/").then((response) => {
       setSymptoms(response.data);
       setSymptoms_(response.data);
     });
@@ -72,7 +72,7 @@ const Symptoms = () => {
 
     //axios post
     axios
-      .post("http://who.ubuzima.rw/who/create-symptom/", postObj, config)
+      .post("https://who.ubuzima.rw/who/create-symptom/", postObj, config)
       .then((res) => {
         setLoading(false);
         resetForm();
